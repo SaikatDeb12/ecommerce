@@ -2,10 +2,13 @@ BEGIN;
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
+CREATE TYPE role_type ENUM('customer', 'admin', 'delivery_agent');
+
 CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
     address TEXT NOT NULL,
     role TEXT NOT NULL DEFAULT 'customer',
     created_at TIMESTAMPTZ DEFAULT now(),

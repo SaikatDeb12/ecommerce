@@ -33,12 +33,12 @@ func GetEnvVariables(key string) string {
 	return os.Getenv(key)
 }
 
-func ResponseError(w http.ResponseWriter, statusCode int, err string, message string) {
+func ResponseError(w http.ResponseWriter, statusCode int, err error, message string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 	newError := models.ErrorModel{
 		Message:    message,
-		Error:      err,
+		Error:      err.Error(),
 		StatusCode: statusCode,
 	}
 
